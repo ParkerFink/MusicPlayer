@@ -7,7 +7,6 @@ from tkinter import ttk
 mixer.init()
 
 
-
 volume = 0.5
 
 def play(currentSong):
@@ -23,9 +22,19 @@ def pause():
 def resume():
     mixer.music.unpause()
 
+def volume_up():
+    global volume
+    print(volume)
+    volume += 0.1
+    if volume >= 1:
+        volume = 1
 
-
-
+def volume_down():
+    global volume
+    print(volume)
+    volume -= 0.1
+    if volume <= 0:
+        volume = 0
 
 main_window = tkinter.Tk()
 main_window.title("Music Player")
@@ -66,6 +75,11 @@ pause.pack(padx=15, pady=15)
 resume = tkinter.Button(secondary_frame, text="Resume", width=15, command=resume)
 resume.pack(padx=15, pady=15)
 
+volumeUp = tkinter.Button(secondary_frame, text="Volume + ", width=15, command=volume_up)
+volumeUp.pack(padx=15, pady=15)
+
+volumeDown = tkinter.Button(secondary_frame, text="Volume - ", width=15, command=volume_down)
+volumeDown.pack(padx=15, pady=15)
 
 
 for song in os.listdir('music/'):
